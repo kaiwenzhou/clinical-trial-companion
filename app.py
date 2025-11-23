@@ -6,9 +6,13 @@ from datetime import datetime
 from typing import Optional
 import json
 import re
+import os
+from dotenv import load_dotenv
 from database import Database, ClinicalEntry
 from claude_extractor import ClaudeExtractor
-import os
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = FastAPI(title="Clinical Trial Companion")
 templates = Jinja2Templates(directory="templates")
