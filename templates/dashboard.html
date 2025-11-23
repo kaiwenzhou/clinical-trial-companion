@@ -402,26 +402,41 @@
         </div>
 
         {% if entries %}
-        <!-- Latest Entry -->
+        <!-- Latest Entries (Grouped) -->
         <div class="latest-entry">
             <div class="latest-entry-header">
                 <div>
-                    <span class="latest-badge">📝 LATEST REPORT</span>
-                    <div style="margin-top: 8px; font-size: 18px; font-weight: 600;">Patient #{{ entries[0].patient_id }} - {{ entries[0].timestamp.strftime('%B %d, %Y at %I:%M %p') if entries[0].timestamp else 'N/A' }}</div>
+                    <span class="latest-badge">📝 LATEST REPORTS</span>
+                    <div style="margin-top: 8px; font-size: 18px; font-weight: 600;">Patient #{{ entries[0].patient_id }} - Recent Activity</div>
                 </div>
                 <div class="compliance-badge">🟢 Compliant</div>
             </div>
 
-            <div class="transcript-box">
-                "{{ entries[0].transcript }}"
+            <!-- Show last 3 transcripts grouped together -->
+            {% for entry in entries[:3] %}
+            <div class="transcript-box" style="margin-bottom: 15px;">
+                <div style="font-size: 12px; color: #65676b; margin-bottom: 5px;">
+                    {{ entry.timestamp.strftime('%I:%M %p') if entry.timestamp else 'N/A' }}
+                </div>
+                "{{ entry.transcript }}"
             </div>
+            {% endfor %}
 
+            <!-- Aggregate all data from recent entries -->
             <div class="extracted-data">
-                <!-- Medications -->
-                {% if entries[0].medications_taken %}
+                <!-- Medications from all recent entries -->
+                {% set all_meds = [] %}
+                {% for entry in entries[:3] %}
+                    {% if entry.medications_taken %}
+                        {% for med in entry.medications_taken %}
+                            {% set _ = all_meds.append(med) %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                {% if all_meds %}
                 <div class="data-section">
                     <h4>💊 Medications Taken</h4>
-                    {% for med in entries[0].medications_taken %}
+                    {% for med in all_meds %}
                     <div class="data-item">
                         <div class="data-item-title">{{ med.name|title }}</div>
                         <div class="data-item-detail">
@@ -434,11 +449,19 @@
                 </div>
                 {% endif %}
 
-                <!-- Symptoms -->
-                {% if entries[0].symptoms %}
+                <!-- Symptoms from all recent entries -->
+                {% set all_symptoms = [] %}
+                {% for entry in entries[:3] %}
+                    {% if entry.symptoms %}
+                        {% for symptom in entry.symptoms %}
+                            {% set _ = all_symptoms.append(symptom) %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                {% if all_symptoms %}
                 <div class="data-section">
                     <h4>🩺 Symptoms Reported</h4>
-                    {% for symptom in entries[0].symptoms %}
+                    {% for symptom in all_symptoms %}
                     <div class="data-item">
                         <div class="data-item-title">
                             {{ symptom.name|title }}
@@ -458,11 +481,19 @@
                 </div>
                 {% endif %}
 
-                <!-- Side Effects -->
-                {% if entries[0].side_effects %}
+                <!-- Side Effects from all recent entries -->
+                {% set all_effects = [] %}
+                {% for entry in entries[:3] %}
+                    {% if entry.side_effects %}
+                        {% for effect in entry.side_effects %}
+                            {% set _ = all_effects.append(effect) %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                {% if all_effects %}
                 <div class="data-section">
                     <h4>⚠️ Side Effects</h4>
-                    {% for effect in entries[0].side_effects %}
+                    {% for effect in all_effects %}
                     <div class="data-item">
                         <div class="data-item-title">{{ effect.symptom|title }}</div>
                         <div class="data-item-detail">
@@ -474,7 +505,7 @@
                 </div>
                 {% endif %}
 
-                <!-- Quality of Life -->
+                <!-- Quality of Life from most recent entry -->
                 {% if entries[0].quality_of_life and (entries[0].quality_of_life.energy_level or entries[0].quality_of_life.work_capacity) %}
                 <div class="data-section">
                     <h4>📈 Quality of Life</h4>
@@ -488,13 +519,21 @@
                 </div>
                 {% endif %}
 
-                <!-- Clinical Summary -->
-                {% if entries[0].clinical_summary %}
+                <!-- Clinical Summaries from all recent entries -->
+                {% set all_summaries = [] %}
+                {% for entry in entries[:3] %}
+                    {% if entry.clinical_summary %}
+                        {% set _ = all_summaries.append(entry.clinical_summary) %}
+                    {% endif %}
+                {% endfor %}
+                {% if all_summaries %}
                 <div class="data-section">
                     <h4>🏥 Clinical Notes</h4>
-                    <div style="color: #1c1e21; line-height: 1.6;">
-                        {{ entries[0].clinical_summary }}
+                    {% for summary in all_summaries %}
+                    <div style="color: #1c1e21; line-height: 1.6; margin-bottom: 10px; padding-bottom: 10px; {% if not loop.last %}border-bottom: 1px solid #e4e6eb;{% endif %}">
+                        {{ summary }}
                     </div>
+                    {% endfor %}
                 </div>
                 {% endif %}
             </div>
