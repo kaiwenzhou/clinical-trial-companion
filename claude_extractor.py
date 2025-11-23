@@ -2,6 +2,10 @@ import os
 import json
 from anthropic import Anthropic
 from typing import Dict, Any
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class ClaudeExtractor:
     """Uses Claude API to extract structured clinical data from patient transcripts"""
