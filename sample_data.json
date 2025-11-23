@@ -1,0 +1,422 @@
+{
+  "trial_info": {
+    "trial_id": "2024-447",
+    "trial_name": "Migraine Prevention Study",
+    "site": "Stanford Medical Center",
+    "patient_id": "7482",
+    "patient_name": "Jane D.",
+    "enrollment_date": "2025-11-08"
+  },
+  "entries": [
+    {
+      "timestamp": "2025-11-22T10:15:30Z",
+      "transcript": "Good morning. I took my trial medication at 8 AM today. Around 10 o'clock, I started feeling some nausea - not terrible, maybe a 4 out of 10. Also had a mild headache that lasted about 30 minutes. Took some ibuprofen for that. Energy levels are pretty good though, been able to work normally.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "08:00",
+          "dose": null,
+          "type": "trial_medication"
+        },
+        {
+          "name": "ibuprofen",
+          "time": "~10:30",
+          "dose": null,
+          "type": "concomitant"
+        }
+      ],
+      "symptoms": [
+        {
+          "name": "nausea",
+          "severity": "4/10",
+          "onset_time": "10:00",
+          "duration": null,
+          "resolved": false
+        },
+        {
+          "name": "headache",
+          "severity": "mild",
+          "onset_time": "~10:00",
+          "duration": "30 minutes",
+          "resolved": true
+        }
+      ],
+      "side_effects": [
+        {
+          "symptom": "nausea",
+          "relation_to_drug": "possible",
+          "timing": "2 hours post-dose"
+        }
+      ],
+      "quality_of_life": {
+        "energy_level": "good",
+        "work_capacity": "normal",
+        "functioning": "able to work normally"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Patient reports moderate nausea (4/10) approximately 2 hours post-dose, along with mild headache (resolved with ibuprofen). Medication adherence confirmed. Energy and work capacity remain normal."
+    },
+    {
+      "timestamp": "2025-11-22T08:30:15Z",
+      "transcript": "Just took my morning dose. Feeling good today!",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "08:30",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "good",
+        "work_capacity": "normal",
+        "functioning": null
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Medication adherence confirmed. Patient reports feeling well with no symptoms."
+    },
+    {
+      "timestamp": "2025-11-21T19:45:00Z",
+      "transcript": "Evening check-in. The mild nausea from this morning went away after lunch. No headaches today which is great. Took my evening dose at 7 PM as scheduled.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "19:00",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [
+        {
+          "name": "nausea",
+          "severity": "mild",
+          "onset_time": "morning",
+          "duration": "until lunch",
+          "resolved": true
+        }
+      ],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "good",
+        "work_capacity": "normal",
+        "functioning": null
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Evening dose taken on schedule. Mild morning nausea resolved by midday. No headaches reported."
+    },
+    {
+      "timestamp": "2025-11-21T08:15:20Z",
+      "transcript": "Took my medication at 8:15 this morning. Feeling a bit of mild nausea but nothing too bad. Slept well last night.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "08:15",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [
+        {
+          "name": "nausea",
+          "severity": "mild",
+          "onset_time": null,
+          "duration": null,
+          "resolved": false
+        }
+      ],
+      "side_effects": [
+        {
+          "symptom": "nausea",
+          "relation_to_drug": "possible",
+          "timing": "shortly after dose"
+        }
+      ],
+      "quality_of_life": {
+        "energy_level": "normal",
+        "work_capacity": "normal",
+        "functioning": "slept well"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Medication taken on time. Patient reports mild nausea and good sleep quality."
+    },
+    {
+      "timestamp": "2025-11-20T20:30:10Z",
+      "transcript": "Evening update. Had a pretty good day overall. Some fatigue in the afternoon but that could just be from work. Took my evening medication at 8 PM.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "20:00",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [
+        {
+          "name": "fatigue",
+          "severity": "mild",
+          "onset_time": "afternoon",
+          "duration": null,
+          "resolved": false
+        }
+      ],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "moderate",
+        "work_capacity": "normal",
+        "functioning": "good day overall"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Evening dose administered. Mild afternoon fatigue noted, possibly work-related rather than medication-related."
+    },
+    {
+      "timestamp": "2025-11-20T08:05:00Z",
+      "transcript": "Good morning, took my medication right at 8 AM. No issues to report today. Feeling energized and ready for the day.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "08:00",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "high",
+        "work_capacity": "normal",
+        "functioning": "feeling energized"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Medication taken on schedule. Patient reports no symptoms and high energy levels."
+    },
+    {
+      "timestamp": "2025-11-19T18:20:45Z",
+      "transcript": "Evening dose taken at 6 PM. Had a headache this afternoon, severity about 3 out of 10. It went away after about an hour. Otherwise feeling okay.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "18:00",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [
+        {
+          "name": "headache",
+          "severity": "3/10",
+          "onset_time": "afternoon",
+          "duration": "about an hour",
+          "resolved": true
+        }
+      ],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "normal",
+        "work_capacity": "normal",
+        "functioning": "feeling okay"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Evening medication administered. Patient experienced mild headache (3/10) in afternoon that self-resolved within one hour."
+    },
+    {
+      "timestamp": "2025-11-19T08:10:30Z",
+      "transcript": "Morning check-in. Took the trial medication at 8:10 AM. Had some trouble sleeping last night but nothing major. No other symptoms.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "08:10",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "moderate",
+        "work_capacity": "normal",
+        "functioning": "some trouble sleeping"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Medication taken as scheduled. Patient reports mild sleep disturbance but no other symptoms."
+    },
+    {
+      "timestamp": "2025-11-18T19:50:00Z",
+      "transcript": "Took my evening dose at 7:45 PM. Feeling great today, no side effects at all. Energy has been good throughout the day.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "19:45",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "good",
+        "work_capacity": "normal",
+        "functioning": "feeling great"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Evening medication administered. Patient reports excellent tolerability with no adverse effects and good energy levels."
+    },
+    {
+      "timestamp": "2025-11-18T08:20:15Z",
+      "transcript": "Morning update. Took medication at 8:20 AM. Woke up with a very mild headache but it's already going away. Slept pretty well.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "08:20",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [
+        {
+          "name": "headache",
+          "severity": "very mild",
+          "onset_time": "upon waking",
+          "duration": "resolving",
+          "resolved": false
+        }
+      ],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "normal",
+        "work_capacity": "normal",
+        "functioning": "slept pretty well"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Medication taken on time. Patient reports very mild headache upon waking that is resolving. Good sleep quality maintained."
+    },
+    {
+      "timestamp": "2025-11-17T20:15:00Z",
+      "transcript": "Evening dose at 8 PM. Had some nausea around lunchtime today, maybe a 2 out of 10, very mild. Went away after eating. Otherwise fine.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "20:00",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [
+        {
+          "name": "nausea",
+          "severity": "2/10",
+          "onset_time": "lunchtime",
+          "duration": "resolved after eating",
+          "resolved": true
+        }
+      ],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "normal",
+        "work_capacity": "normal",
+        "functioning": "otherwise fine"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Evening medication on schedule. Very mild nausea (2/10) at midday that resolved with food intake."
+    },
+    {
+      "timestamp": "2025-11-17T08:05:20Z",
+      "transcript": "Good morning, took my medication at 8 AM sharp. Feeling good, no complaints today.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "08:00",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "good",
+        "work_capacity": "normal",
+        "functioning": "feeling good"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Medication administered on time. Patient reports no symptoms and baseline good health status."
+    },
+    {
+      "timestamp": "2025-11-16T19:40:00Z",
+      "transcript": "Evening check-in. Took medication at 7:30 PM. Had a productive day at work. No side effects to report. Feeling normal.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "19:30",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "normal",
+        "work_capacity": "productive day",
+        "functioning": "feeling normal"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Evening dose taken. Patient reports good work productivity and no adverse effects."
+    },
+    {
+      "timestamp": "2025-11-16T08:25:10Z",
+      "transcript": "Morning dose taken at 8:25 AM. Running a few minutes late today but got it done. Feeling fine, ready for the weekend.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "08:25",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [],
+      "side_effects": [],
+      "quality_of_life": {
+        "energy_level": "normal",
+        "work_capacity": "normal",
+        "functioning": "feeling fine"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Medication taken slightly later than usual but within acceptable window. No symptoms reported."
+    },
+    {
+      "timestamp": "2025-11-15T20:10:00Z",
+      "transcript": "Evening medication at 8 PM. Noticed some dizziness earlier this afternoon, lasted maybe 10 minutes. Rating it a 2 out of 10, very minor. All good now.",
+      "medications_taken": [
+        {
+          "name": "trial medication",
+          "time": "20:00",
+          "dose": null,
+          "type": "trial_medication"
+        }
+      ],
+      "symptoms": [
+        {
+          "name": "dizziness",
+          "severity": "2/10",
+          "onset_time": "afternoon",
+          "duration": "10 minutes",
+          "resolved": true
+        }
+      ],
+      "side_effects": [
+        {
+          "symptom": "dizziness",
+          "relation_to_drug": "possible",
+          "timing": "afternoon"
+        }
+      ],
+      "quality_of_life": {
+        "energy_level": "normal",
+        "work_capacity": "normal",
+        "functioning": "all good now"
+      },
+      "adherence_status": "compliant",
+      "clinical_summary": "Evening dose administered. Patient experienced brief, mild dizziness (2/10) in afternoon lasting 10 minutes, now resolved."
+    }
+  ]
+}

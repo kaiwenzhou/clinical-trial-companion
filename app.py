@@ -7,32 +7,21 @@ from typing import Optional
 import json
 import re
 from database import Database, ClinicalEntry
+from claude_extractor import ClaudeExtractor
+import os
 
 app = FastAPI(title="Clinical Trial Companion")
 templates = Jinja2Templates(directory="templates")
 db = Database()
 
-# Medical keywords for extraction
-SYMPTOMS = ['pain', 'headache', 'nausea', 'fatigue', 'dizziness', 'fever', 'cough',
-            'tired', 'sick', 'hurt', 'ache', 'sore', 'weak', 'vomit', 'rash']
-MEDICATIONS = ['aspirin', 'ibuprofen', 'tylenol', 'medication', 'pill', 'tablet',
-               'medicine', 'drug', 'dose', 'prescription']
-SIDE_EFFECTS = ['side effect', 'reaction', 'allergy', 'adverse']
-
-def extract_clinical_data(transcript: str) -> dict:
-    """Extract medical entities from transcript"""
-    transcript_lower = transcript.lower()
-
-    found_symptoms = [s for s in SYMPTOMS if s in transcript_lower]
-    found_medications = [m for m in MEDICATIONS if m in transcript_lower]
-    found_side_effects = [se for se in SIDE_EFFECTS if se in transcript_lower]
-
-    return {
-        "symptoms": found_symptoms,
-        "medications": found_medications,
-        "side_effects": found_side_effects,
-        "raw_transcript": transcript
-    }
+# Initialize Claude extractor
+try:
+    claude_extractor = ClaudeExtractor()
+    print("✅ Claude API initialized")
+except Exception as e:
+    print(f"⚠️  Claude API not initialized: {e}")
+    print("   Set ANTHROPIC_API_KEY environment variable to enable AI extraction")
+    claude_extractor = None
 
 @app.get("/", response_class=HTMLResponse)
 async def dashboard(request: Request):
@@ -80,20 +69,32 @@ async def omi_webhook(request: Request):
             print("⚠️  No transcript found in payload")
             return {"status": "ok", "message": "No transcript found"}
 
-        # Extract clinical data
-        clinical_data = extract_clinical_data(transcript)
-
-        print(f"\n🔍 EXTRACTED DATA:")
-        print(f"   Symptoms: {clinical_data['symptoms']}")
-        print(f"   Medications: {clinical_data['medications']}")
-        print(f"   Side Effects: {clinical_data['side_effects']}")
+        # Extract clinical data using Claude
+        if claude_extractor:
+            print("\n🤖 Using Claude API for extraction...")
+            clinical_data = claude_extractor.extract_clinical_data(transcript)
+            print(f"\n🔍 EXTRACTED DATA:")
+            print(json.dumps(clinical_data, indent=2))
+        else:
+            print("\n⚠️  Claude not available, skipping extraction")
+            clinical_data = {
+                "medications_taken": [],
+                "symptoms": [],
+                "side_effects": [],
+                "quality_of_life": {},
+                "adherence_status": "unknown",
+                "clinical_summary": "Claude API not configured"
+            }
 
         # Store in database
         entry = await db.add_entry(
             transcript=transcript,
-            symptoms=clinical_data['symptoms'],
-            medications=clinical_data['medications'],
-            side_effects=clinical_data['side_effects'],
+            medications_taken=clinical_data.get("medications_taken", []),
+            symptoms=clinical_data.get("symptoms", []),
+            side_effects=clinical_data.get("side_effects", []),
+            quality_of_life=clinical_data.get("quality_of_life", {}),
+            adherence_status=clinical_data.get("adherence_status", "unknown"),
+            clinical_summary=clinical_data.get("clinical_summary", ""),
             raw_data=payload
         )
 
@@ -130,6 +131,51 @@ async def test_webhook(request: Request):
     """Test endpoint to simulate Omi webhook"""
     payload = await request.json()
     return await omi_webhook(request)
+
+@app.get("/export/pdf/{patient_id}")
+async def export_pdf(request: Request, patient_id: str):
+    """Export patient data as a formatted PDF report"""
+    entries = await db.get_all_entries()
+
+    # Filter entries for this patient
+    patient_entries = [e for e in entries if e.patient_id == patient_id]
+
+    if not patient_entries:
+        return HTMLResponse("<h1>No data found for this patient</h1>", status_code=404)
+
+    # Calculate statistics
+    total_entries = len(patient_entries)
+    medications_count = sum(1 for e in patient_entries if e.medications_taken)
+    symptoms_reported = sum(len(e.symptoms) for e in patient_entries if e.symptoms)
+
+    # Get date range
+    from datetime import datetime
+    dates = [e.timestamp for e in patient_entries if e.timestamp]
+    if dates:
+        start_date = min(dates)
+        end_date = max(dates)
+        days_enrolled = (end_date - start_date).days + 1
+    else:
+        start_date = datetime.now()
+        end_date = datetime.now()
+        days_enrolled = 1
+
+    return templates.TemplateResponse("report.html", {
+        "request": request,
+        "patient_id": patient_id,
+        "patient_name": "Jane D.",
+        "trial_name": "Migraine Prevention Study",
+        "trial_id": "2024-447",
+        "site": "Stanford Medical Center",
+        "start_date": start_date,
+        "end_date": end_date,
+        "days_enrolled": days_enrolled,
+        "total_entries": total_entries,
+        "medications_count": medications_count,
+        "symptoms_reported": symptoms_reported,
+        "adherence_rate": 100,
+        "entries": patient_entries
+    })
 
 @app.on_event("startup")
 async def startup():

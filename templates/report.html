@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Report - {{ patient_id }}</title>
+    <style>
+        @media print {
+            @page {
+                margin: 1cm;
+            }
+            body {
+                background: white;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: white;
+            color: #000;
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #333;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header h2 {
+            font-size: 18px;
+            color: #555;
+            font-weight: normal;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 30px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            padding: 8px 0;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .info-value {
+            color: #000;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            border: 2px solid #333;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .entry {
+            border-left: 3px solid #333;
+            padding-left: 20px;
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .entry-date {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .entry-transcript {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: #333;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 3px solid #666;
+        }
+
+        .entry-data {
+            margin-left: 15px;
+            font-size: 13px;
+        }
+
+        .data-category {
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        .data-item {
+            margin-left: 15px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .summary-text {
+            background: #f0f0f0;
+            padding: 12px;
+            border-left: 4px solid #333;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #000;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #333;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .download-btn {
+            background: #333;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 20px 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            background: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f0f0f0;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        td {
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Patient-Reported Outcomes (PRO)</h1>
+        <h2>Clinical Trial Report</h2>
+    </div>
+
+    <!-- Patient Information -->
+    <div class="section">
+        <div class="section-title">Patient Information</div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Patient ID:</div>
+                <div class="info-value">{{ patient_id }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Patient Name:</div>
+                <div class="info-value">{{ patient_name }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Trial:</div>
+                <div class="info-value">{{ trial_name }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Trial ID:</div>
+                <div class="info-value">#{{ trial_id }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Site:</div>
+                <div class="info-value">{{ site }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Reporting Period:</div>
+                <div class="info-value">{{ start_date.strftime('%B %d, %Y') }} - {{ end_date.strftime('%B %d, %Y') }} ({{ days_enrolled }} days)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="section">
+        <div class="section-title">Summary Statistics</div>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">Total Reports</div>
+                <div class="stat-value">{{ total_entries }}</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Medication Doses</div>
+                <div class="stat-value">{{ medications_count }}</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Adherence Rate</div>
+                <div class="stat-value">{{ adherence_rate }}%</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Symptoms Reported</div>
+                <div class="stat-value">{{ symptoms_reported }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Timeline -->
+    <div class="section">
+        <div class="section-title">Detailed Timeline of Patient Reports</div>
+
+        {% for entry in entries %}
+        <div class="entry">
+            <div class="entry-date">
+                {{ entry.timestamp.strftime('%B %d, %Y at %I:%M %p') if entry.timestamp else 'N/A' }}
+            </div>
+
+            <div class="entry-transcript">
+                "{{ entry.transcript }}"
+            </div>
+
+            <div class="entry-data">
+                {% if entry.medications_taken %}
+                <div class="data-category">💊 Medications Taken:</div>
+                {% for med in entry.medications_taken %}
+                <div class="data-item">
+                    • {{ med.name|title }} at {{ med.time }}{% if med.dose %} ({{ med.dose }}){% endif %}{% if med.type %} - {{ med.type|replace('_', ' ')|title }}{% endif %}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if entry.symptoms %}
+                <div class="data-category">🩺 Symptoms:</div>
+                {% for symptom in entry.symptoms %}
+                <div class="data-item">
+                    • {{ symptom.name|title }}{% if symptom.severity %} (Severity: {{ symptom.severity }}){% endif %}{% if symptom.onset_time %} - Onset: {{ symptom.onset_time }}{% endif %}{% if symptom.duration %}, Duration: {{ symptom.duration }}{% endif %}{% if symptom.resolved %} [Resolved]{% endif %}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if entry.side_effects %}
+                <div class="data-category">⚠️ Side Effects:</div>
+                {% for effect in entry.side_effects %}
+                <div class="data-item">
+                    • {{ effect.symptom|title }}{% if effect.relation_to_drug %} ({{ effect.relation_to_drug|title }} relation to drug){% endif %}{% if effect.timing %} - {{ effect.timing }}{% endif %}
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if entry.quality_of_life and (entry.quality_of_life.energy_level or entry.quality_of_life.work_capacity) %}
+                <div class="data-category">📈 Quality of Life:</div>
+                <div class="data-item">
+                    {% if entry.quality_of_life.energy_level %}Energy: {{ entry.quality_of_life.energy_level|title }}{% endif %}
+                    {% if entry.quality_of_life.work_capacity %}{% if entry.quality_of_life.energy_level %} | {% endif %}Work Capacity: {{ entry.quality_of_life.work_capacity|title }}{% endif %}
+                    {% if entry.quality_of_life.functioning %}{% if entry.quality_of_life.energy_level or entry.quality_of_life.work_capacity %} | {% endif %}{{ entry.quality_of_life.functioning }}{% endif %}
+                </div>
+                {% endif %}
+
+                {% if entry.clinical_summary %}
+                <div class="summary-text">
+                    <strong>Clinical Summary:</strong> {{ entry.clinical_summary }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Data Collection Method -->
+    <div class="section">
+        <div class="section-title">Data Collection Method</div>
+        <p>Voice-based passive capture via Omi Clinical Platform</p>
+        <p>All entries timestamped and AI-extracted using Claude Sonnet 4</p>
+        <p>Data structured for clinical trial compliance</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Generated: {{ end_date.strftime('%B %d, %Y at %I:%M %p') }}</p>
+        <p>Clinical Trial Companion - Powered by Omi + Claude AI</p>
+    </div>
+
+    <!-- Print/Download buttons (hidden when printing) -->
+    <div class="no-print" style="text-align: center; margin-top: 30px;">
+        <button onclick="window.print()" class="download-btn">🖨️ Print / Save as PDF</button>
+        <a href="/" class="download-btn" style="margin-left: 10px;">← Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Optional: Auto-print on load (comment out if not desired)
+        // window.onload = function() {
+        //     setTimeout(function() { window.print(); }, 500);
+        // };
+    </script>
+</body>
+</html>

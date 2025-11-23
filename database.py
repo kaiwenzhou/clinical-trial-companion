@@ -13,20 +13,31 @@ class ClinicalEntry(Base):
 
     id = Column(Integer, primary_key=True)
     timestamp = Column(DateTime, default=datetime.utcnow)
+    patient_id = Column(String, default="7482")  # Patient identifier
     transcript = Column(Text)
-    symptoms = Column(JSON)  # List of symptoms
-    medications = Column(JSON)  # List of medications
-    side_effects = Column(JSON)  # List of side effects
+
+    # Enhanced structured data from Claude
+    medications_taken = Column(JSON)  # [{"name": "...", "time": "...", "dose": "..."}]
+    symptoms = Column(JSON)  # [{"name": "...", "severity": "...", "onset_time": "..."}]
+    side_effects = Column(JSON)  # [{"symptom": "...", "relation_to_drug": "..."}]
+    quality_of_life = Column(JSON)  # {"energy_level": "...", "work_capacity": "..."}
+    adherence_status = Column(String)  # "compliant", "non-compliant"
+    clinical_summary = Column(Text)  # AI-generated summary
+
     raw_data = Column(JSON)  # Full Omi payload
 
     def to_dict(self):
         return {
             "id": self.id,
             "timestamp": self.timestamp.isoformat() if self.timestamp else None,
+            "patient_id": self.patient_id,
             "transcript": self.transcript,
+            "medications_taken": self.medications_taken or [],
             "symptoms": self.symptoms or [],
-            "medications": self.medications or [],
             "side_effects": self.side_effects or [],
+            "quality_of_life": self.quality_of_life or {},
+            "adherence_status": self.adherence_status,
+            "clinical_summary": self.clinical_summary,
         }
 
 class Database:
@@ -45,19 +56,27 @@ class Database:
     async def add_entry(
         self,
         transcript: str,
-        symptoms: List[str],
-        medications: List[str],
-        side_effects: List[str],
-        raw_data: dict
+        patient_id: str = "7482",
+        medications_taken: Optional[List[dict]] = None,
+        symptoms: Optional[List[dict]] = None,
+        side_effects: Optional[List[dict]] = None,
+        quality_of_life: Optional[dict] = None,
+        adherence_status: Optional[str] = None,
+        clinical_summary: Optional[str] = None,
+        raw_data: Optional[dict] = None
     ) -> ClinicalEntry:
         """Add a new clinical entry"""
         async with self.SessionLocal() as session:
             entry = ClinicalEntry(
                 transcript=transcript,
-                symptoms=symptoms,
-                medications=medications,
-                side_effects=side_effects,
-                raw_data=raw_data
+                patient_id=patient_id,
+                medications_taken=medications_taken or [],
+                symptoms=symptoms or [],
+                side_effects=side_effects or [],
+                quality_of_life=quality_of_life or {},
+                adherence_status=adherence_status,
+                clinical_summary=clinical_summary,
+                raw_data=raw_data or {}
             )
             session.add(entry)
             await session.commit()
