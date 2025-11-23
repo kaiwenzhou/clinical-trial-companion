@@ -12,260 +12,570 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f7fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f0f2f5;
+            color: #1c1e21;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 20px;
         }
 
-        .header {
+        /* Header */
+        .trial-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .stats {
+        .trial-header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
             display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-left: auto;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .trial-subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
 
         .stat-card {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            flex: 1;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #667eea;
         }
 
         .stat-card h3 {
-            color: #666;
+            font-size: 13px;
+            color: #65676b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1c1e21;
+        }
+
+        .stat-card .subtext {
+            font-size: 13px;
+            color: #65676b;
+            margin-top: 4px;
+        }
+
+        /* Latest Entry Card */
+        .latest-entry {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 2px solid #667eea;
+        }
+
+        .latest-entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f2f5;
+        }
+
+        .latest-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .entry-time {
+            color: #65676b;
             font-size: 14px;
-            font-weight: normal;
-            margin-bottom: 5px;
         }
 
-        .stat-card .number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #667eea;
+        .transcript-box {
+            background: #f7f8fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #1c1e21;
+            line-height: 1.8;
         }
 
-        .entries {
+        .extracted-data {
             display: grid;
             gap: 20px;
         }
 
-        .entry-card {
-            background: white;
-            padding: 25px;
+        .data-section {
+            background: #f7f8fa;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
         }
 
-        .entry-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        .data-section h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #65676b;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
         }
 
-        .entry-header {
+        .data-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .data-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .data-item-title {
+            font-weight: 600;
+            color: #1c1e21;
+            margin-bottom: 4px;
+        }
+
+        .data-item-detail {
+            font-size: 13px;
+            color: #65676b;
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .severity-mild {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .severity-moderate {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .severity-severe {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Timeline */
+        .timeline-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 20px;
         }
 
-        .entry-id {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 18px;
+        .timeline-header h2 {
+            font-size: 22px;
+            color: #1c1e21;
         }
 
-        .entry-time {
-            color: #999;
+        .export-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
             font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .transcript {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            font-style: italic;
-            color: #333;
-            line-height: 1.6;
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
         }
 
-        .clinical-data {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+        .timeline {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        .data-group {
-            padding: 12px;
-            border-radius: 6px;
+        .timeline-entry {
+            padding: 20px;
+            border-left: 3px solid #e4e6eb;
+            margin-bottom: 20px;
+            position: relative;
         }
 
-        .data-group.symptoms {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
+        .timeline-entry:before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 24px;
+            width: 11px;
+            height: 11px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 2px solid white;
         }
 
-        .data-group.medications {
-            background: #d1ecf1;
-            border-left: 4px solid #17a2b8;
+        .timeline-entry:last-child {
+            border-left-color: transparent;
         }
 
-        .data-group.side-effects {
-            background: #f8d7da;
-            border-left: 4px solid #dc3545;
-        }
-
-        .data-group h4 {
-            font-size: 12px;
-            text-transform: uppercase;
+        .timeline-date {
+            font-size: 13px;
+            font-weight: 600;
+            color: #667eea;
             margin-bottom: 8px;
-            color: #666;
         }
 
-        .tag {
+        .timeline-content {
+            padding-left: 20px;
+        }
+
+        .timeline-transcript {
+            color: #1c1e21;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .timeline-summary {
+            font-size: 13px;
+            color: #65676b;
+            background: #f7f8fa;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .compliance-badge {
             display: inline-block;
             padding: 4px 10px;
-            margin: 2px;
             border-radius: 12px;
-            font-size: 13px;
-            background: rgba(0,0,0,0.1);
+            font-size: 12px;
+            font-weight: 600;
+            background: #d4edda;
+            color: #155724;
         }
 
         .empty-state {
             text-align: center;
             padding: 60px 20px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .empty-state h2 {
-            color: #999;
+            color: #65676b;
             margin-bottom: 10px;
         }
 
         .empty-state p {
-            color: #bbb;
+            color: #8a8d91;
         }
 
-        .refresh-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #667eea;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 50px;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
         }
 
-        .refresh-btn:hover {
-            background: #5568d3;
-            transform: scale(1.05);
-        }
-
-        .auto-refresh {
-            color: white;
-            opacity: 0.8;
-            font-size: 14px;
-            margin-top: 5px;
+        .auto-refresh-notice {
+            text-align: center;
+            padding: 12px;
+            background: #e7f3ff;
+            color: #004085;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🏥 Clinical Trial Companion</h1>
-        <p>Real-time patient-reported outcomes from Omi device</p>
-        <p class="auto-refresh">Auto-refreshing every 5 seconds...</p>
-    </div>
-
-    <div class="stats">
-        <div class="stat-card">
-            <h3>Total Entries</h3>
-            <div class="number">{{ total }}</div>
+    <div class="container">
+        <!-- Trial Header -->
+        <div class="trial-header">
+            <h1>
+                Clinical Trial Companion
+                <span class="live-indicator">
+                    <span class="live-dot"></span>
+                    LIVE
+                </span>
+            </h1>
+            <div class="trial-subtitle">Trial: Migraine Prevention Study #2024-447</div>
         </div>
-    </div>
 
-    {% if entries %}
-    <div class="entries">
-        {% for entry in entries %}
-        <div class="entry-card">
-            <div class="entry-header">
-                <div class="entry-id">Entry #{{ entry.id }}</div>
-                <div class="entry-time">{{ entry.timestamp.strftime('%Y-%m-%d %H:%M:%S') if entry.timestamp else 'N/A' }}</div>
+        <!-- Auto-refresh notice -->
+        <div class="auto-refresh-notice">
+            🔄 Auto-refreshing every 5 seconds to show latest data
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Active Patients</h3>
+                <div class="value">1</div>
+                <div class="subtext">Patient #7482 (Jane D.)</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Reports</h3>
+                <div class="value">{{ total }}</div>
+                <div class="subtext">Last update: Just now</div>
+            </div>
+            <div class="stat-card">
+                <h3>Adherence Rate</h3>
+                <div class="value">{% if total > 0 %}100%{% else %}--{% endif %}</div>
+                <div class="subtext">{{ total }}/{{ total }} doses</div>
+            </div>
+            <div class="stat-card">
+                <h3>Compliance Status</h3>
+                <div class="value" style="font-size: 20px; color: #28a745;">✅ Compliant</div>
+                <div class="subtext">No missed doses</div>
+            </div>
+        </div>
+
+        {% if entries %}
+        <!-- Latest Entries (Grouped) -->
+        <div class="latest-entry">
+            <div class="latest-entry-header">
+                <div>
+                    <span class="latest-badge">📝 LATEST REPORTS</span>
+                    <div style="margin-top: 8px; font-size: 18px; font-weight: 600;">Patient #{{ entries[0].patient_id }} - Recent Activity</div>
+                </div>
+                <div class="compliance-badge">🟢 Compliant</div>
             </div>
 
-            <div class="transcript">
+            <!-- Show last 3 transcripts grouped together -->
+            {% for entry in entries[:3] %}
+            <div class="transcript-box" style="margin-bottom: 15px;">
+                <div style="font-size: 12px; color: #65676b; margin-bottom: 5px;">
+                    {{ entry.timestamp.strftime('%I:%M %p') if entry.timestamp else 'N/A' }}
+                </div>
                 "{{ entry.transcript }}"
             </div>
+            {% endfor %}
 
-            <div class="clinical-data">
-                <div class="data-group symptoms">
-                    <h4>⚠️ Symptoms</h4>
+            <!-- Aggregate all data from recent entries -->
+            <div class="extracted-data">
+                <!-- Medications from all recent entries -->
+                {% set all_meds = [] %}
+                {% for entry in entries[:3] %}
+                    {% if entry.medications_taken %}
+                        {% for med in entry.medications_taken %}
+                            {% set _ = all_meds.append(med) %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                {% if all_meds %}
+                <div class="data-section">
+                    <h4>💊 Medications Taken</h4>
+                    {% for med in all_meds %}
+                    <div class="data-item">
+                        <div class="data-item-title">{{ med.name|title }}</div>
+                        <div class="data-item-detail">
+                            ⏰ Time: {{ med.time }}
+                            {% if med.dose %} | 💊 Dose: {{ med.dose }}{% endif %}
+                            {% if med.type %} | Type: {{ med.type|replace('_', ' ')|title }}{% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Symptoms from all recent entries -->
+                {% set all_symptoms = [] %}
+                {% for entry in entries[:3] %}
                     {% if entry.symptoms %}
                         {% for symptom in entry.symptoms %}
-                        <span class="tag">{{ symptom }}</span>
+                            {% set _ = all_symptoms.append(symptom) %}
                         {% endfor %}
-                    {% else %}
-                        <span style="color: #999; font-size: 13px;">None detected</span>
                     {% endif %}
+                {% endfor %}
+                {% if all_symptoms %}
+                <div class="data-section">
+                    <h4>🩺 Symptoms Reported</h4>
+                    {% for symptom in all_symptoms %}
+                    <div class="data-item">
+                        <div class="data-item-title">
+                            {{ symptom.name|title }}
+                            {% if symptom.severity %}
+                            <span class="severity-badge {% if '1/' in symptom.severity|string or '2/' in symptom.severity|string or 'mild' in symptom.severity|lower %}severity-mild{% elif '3/' in symptom.severity|string or '4/' in symptom.severity|string or '5/' in symptom.severity|string or 'moderate' in symptom.severity|lower %}severity-moderate{% else %}severity-severe{% endif %}">
+                                {{ symptom.severity }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        <div class="data-item-detail">
+                            {% if symptom.onset_time %}⏰ Onset: {{ symptom.onset_time }}{% endif %}
+                            {% if symptom.duration %} | ⏱️ Duration: {{ symptom.duration }}{% endif %}
+                            {% if symptom.resolved %} | ✅ Status: Resolved{% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
+                {% endif %}
 
-                <div class="data-group medications">
-                    <h4>💊 Medications</h4>
-                    {% if entry.medications %}
-                        {% for med in entry.medications %}
-                        <span class="tag">{{ med }}</span>
-                        {% endfor %}
-                    {% else %}
-                        <span style="color: #999; font-size: 13px;">None detected</span>
-                    {% endif %}
-                </div>
-
-                <div class="data-group side-effects">
-                    <h4>⚡ Side Effects</h4>
+                <!-- Side Effects from all recent entries -->
+                {% set all_effects = [] %}
+                {% for entry in entries[:3] %}
                     {% if entry.side_effects %}
                         {% for effect in entry.side_effects %}
-                        <span class="tag">{{ effect }}</span>
+                            {% set _ = all_effects.append(effect) %}
                         {% endfor %}
-                    {% else %}
-                        <span style="color: #999; font-size: 13px;">None detected</span>
+                    {% endif %}
+                {% endfor %}
+                {% if all_effects %}
+                <div class="data-section">
+                    <h4>⚠️ Side Effects</h4>
+                    {% for effect in all_effects %}
+                    <div class="data-item">
+                        <div class="data-item-title">{{ effect.symptom|title }}</div>
+                        <div class="data-item-detail">
+                            {% if effect.relation_to_drug %}Relation to drug: {{ effect.relation_to_drug|title }}{% endif %}
+                            {% if effect.timing %} | Timing: {{ effect.timing }}{% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Quality of Life from most recent entry -->
+                {% if entries[0].quality_of_life and (entries[0].quality_of_life.energy_level or entries[0].quality_of_life.work_capacity) %}
+                <div class="data-section">
+                    <h4>📈 Quality of Life</h4>
+                    <div class="data-item">
+                        <div class="data-item-detail">
+                            {% if entries[0].quality_of_life.energy_level %}⚡ Energy: {{ entries[0].quality_of_life.energy_level|title }}{% endif %}
+                            {% if entries[0].quality_of_life.work_capacity %} | 💼 Work Capacity: {{ entries[0].quality_of_life.work_capacity|title }}{% endif %}
+                            {% if entries[0].quality_of_life.functioning %} | 🎯 Functioning: {{ entries[0].quality_of_life.functioning }}{% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Clinical Summaries from all recent entries -->
+                {% set all_summaries = [] %}
+                {% for entry in entries[:3] %}
+                    {% if entry.clinical_summary %}
+                        {% set _ = all_summaries.append(entry.clinical_summary) %}
+                    {% endif %}
+                {% endfor %}
+                {% if all_summaries %}
+                <div class="data-section">
+                    <h4>🏥 Clinical Notes</h4>
+                    {% for summary in all_summaries %}
+                    <div style="color: #1c1e21; line-height: 1.6; margin-bottom: 10px; padding-bottom: 10px; {% if not loop.last %}border-bottom: 1px solid #e4e6eb;{% endif %}">
+                        {{ summary }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-header">
+            <h2>📅 Patient Timeline</h2>
+            <a href="/export/pdf/{{ entries[0].patient_id }}" class="export-btn">📄 Export Report</a>
+        </div>
+
+        <div class="timeline">
+            {% for entry in entries %}
+            <div class="timeline-entry">
+                <div class="timeline-date">
+                    {{ entry.timestamp.strftime('%B %d, %Y at %I:%M %p') if entry.timestamp else 'N/A' }}
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-transcript">
+                        "{{ entry.transcript }}"
+                    </div>
+                    {% if entry.clinical_summary %}
+                    <div class="timeline-summary">
+                        🤖 AI Summary: {{ entry.clinical_summary }}
+                    </div>
                     {% endif %}
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        {% else %}
+        <!-- Empty State -->
+        <div class="empty-state">
+            <h2>No entries yet</h2>
+            <p>Waiting for data from Omi device...</p>
+            <p style="margin-top: 20px;">Webhook URL: <strong>http://localhost:8000/webhook/omi</strong></p>
+            <p style="margin-top: 10px; font-size: 14px; color: #65676b;">
+                Or run: <code style="background: #f7f8fa; padding: 4px 8px; border-radius: 4px;">python3 populate_db.py</code> to load sample data
+            </p>
+        </div>
+        {% endif %}
     </div>
-    {% else %}
-    <div class="empty-state">
-        <h2>No entries yet</h2>
-        <p>Waiting for data from Omi device...</p>
-        <p style="margin-top: 20px;">Webhook URL: <strong>http://localhost:8000/webhook/omi</strong></p>
-    </div>
-    {% endif %}
-
-    <button class="refresh-btn" onclick="location.reload()">🔄 Refresh Now</button>
 
     <script>
         // Auto-refresh every 5 seconds
